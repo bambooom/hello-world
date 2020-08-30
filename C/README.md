@@ -34,6 +34,10 @@ And then do `make`:
 ```sh
 $ make ex0
 cc     ex0.c   -o ex0
+# or use cc
+$ cc ex0.c -o ex0
+
+# then run it
 $ ./ex0
 Hello!
 ```
