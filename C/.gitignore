@@ -1,7 +1,11 @@
 # need to ignore binary files
 *
+# not ignore all dirs
+!*/
 !*.c
 !*.md
+!Makefile
+!*/Makefile
 
 # Prerequisites
 *.d
