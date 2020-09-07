@@ -64,3 +64,30 @@ List the quick reference of `lldb` here since I only have OSX now.
 - `attach -p pid` Attach to a running process so you can debug it.
 - `detach` Detach from the process.
 - `list` List out the next ten source lines. Add a `-` to list the previous ten sources.
+
+
+## Memorizing operators (ex5)
+> only copy those operators I'm not familiar with here:
+
+### Logical Operators
+- `&` bitwise and
+- `|` bitwise or
+- `^` bitwise xor
+- `~` bitwise ones compliment
+- `<<` bitwise shift left
+- `>>` bitwise shift right
+
+### Assignment Operators
+- `<<=` assign shift-left-equal
+- `>>=` assign shift-right-equal
+- `&=` assign and-equal
+- `^=` assign xor-equal
+- `|=` assign or-equal
+
+### Data Operators
+- `sizeof()` get the size of
+- `[]` array subscript
+- `&` address of
+- `*` value of
+- `->` structure dereference
+- `.` structure reference
