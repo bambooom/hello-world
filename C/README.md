@@ -1,5 +1,4 @@
-> This directory just contains the exercises and notes when I'm learning the
-learn-c-the-hard-way course.
+> This directory just contains the exercises and notes when I'm learning the learn-c-the-hard-way course.
 
 ## Preparation
 As I'm currently using macOS Catalina, and I previously installed and run Xcode, so no other preparation needed.
@@ -10,8 +9,8 @@ clang: error: no input files
 $ cc
 clang: error: no input files
 $ cc --version
-Apple clang version 11.0.3 (clang-1103.0.32.62)
-Target: x86_64-apple-darwin19.6.0
+Apple clang version 12.0.0 (clang-1200.0.32.27)
+Target: x86_64-apple-darwin20.3.0
 Thread model: posix
 InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
 ```
