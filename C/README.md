@@ -41,6 +41,9 @@ $ ./ex0
 Hello!
 ```
 
+### Do not use IDE
+The book said so, I will try to use vim although I'm really not good at it.
+
 ## Debugging intro (from ex4)
 Use `gdb` on Linux, use `lldb` on OSX.
 For more advanced tool, use `Valgrind` on Linux, use `AddressSanitizer` on OSX.
@@ -90,3 +93,135 @@ List the quick reference of `lldb` here since I only have OSX now.
 - `*` value of
 - `->` structure dereference
 - `.` structure reference
+
+## Memorizing syntax (ex6)
+> The technical term for processing the symbols and keywords of a programming language is *lexical analysis*. The word for one of these symbols or keywords is a *lexeme*.
+
+### Keywords
+- `auto` : Give a local variable a local lifetime.
+- `break` : Exit out of a compound statement.
+- `case` : A branch in a switch-statement.
+- `char` : Character data type.
+- `const` : Make a variable unmodifiable.
+- `continue` : Continue to the top of a loop.
+- `default` : Default branch in a switch-statement.
+- `do` : Start a do-while loop.
+- `double` : A double floating point data type.
+- `else` : An else branch of an if-statement.
+- `enum` : Define a set of `int` constants.
+- `extern` : Declare an identifier is defined externally.
+- `float` : A floating point data type.
+- `for` : Start a for-loop.
+- `goto` : Jump to a label.
+- `if` : Starts an if-statement.
+- `int` : An integer data type.
+- `long` : A long integer data type.
+- `register` : Declare a variable be stored in a CPU register.
+- `return` : Return from a function.
+- `short` : A short integer data type.
+- `signed` : A signed modifier for integer data types.
+- `sizeof` : Determine the size of data.
+- `static` : Preserve variable value after its scope exits.
+- `struct` : Combine variables into a single record.
+- `switch` : Start a switch-statement.
+- `typedef` : Create a new type.
+- `union` : Start a union-statement.
+- `unsigned` : An unsigned modifier for integer data types.
+- `void` : Declare a data type empty.
+- `volatile` : Declare a variable might be modified elsewhere.
+- `while` : Start a while-loop.
+
+### syntax structure
+
+```c
+if(TEST) {
+  CODE;
+} else if(TEST) {
+  CODE;
+}else{
+  CODE;
+}
+```
+
+```c
+switch (OPERAND) {
+  case CONSTANT:
+    CODE;
+    break;
+  default:
+    CODE;
+}
+```
+
+```c
+while (TEST) {
+  if (OTHER_TEST) {
+    continue;
+  }
+  if (OTHER_TEST) {
+    break;
+  }
+  CODE;
+}
+
+do {
+  CODE;
+} while(TEST);
+```
+
+```c
+for(INIT; TEST; POST) {
+  CODE;
+}
+```
+
+```c
+// An enum creates a set of integer constants:
+enum { CONST1, CONST2, CONST3 } NAME;
+```
+
+```c
+// A goto will jumpt to a label, and is only used
+// in a few useful situations like error detection and exiting
+if (ERROR_TEST) {
+  goto fail;
+}
+
+fail:
+  CODE;
+```
+
+```c
+// define function
+// int= return value type, name=function name
+int name(arg1, arg2) {
+  CODE;
+  return 0;
+}
+```
+
+```c
+// typedef DEFINITION IDENTIFIER ;
+// unsigned char = Definition, byte = Identifier
+typedef unsigned char byte;
+```
+
+```c
+// A struct is a packaging of many base data types into a single concept,
+// which are used heavily in C. (seems like Object in JS)
+// [VARIABLE_NAME] is optional
+struct NAME {
+  ELEMENTS ;
+} [VARIABLE_NAME];
+
+// often combine with typedef
+typedef struct [STRUCT_NAME] {
+  ELEMENTS ;
+} IDENTIFIER ;
+
+// `union` creates something like a `struct`, but the elements will overlap in memory.
+// simply memorize the form for now
+union NAME {
+  ELEMENTS ;
+} [VARIABLE_NAME] ;
+```
