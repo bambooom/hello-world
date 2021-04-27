@@ -134,11 +134,11 @@ List the quick reference of `lldb` here since I only have OSX now.
 ### syntax structure
 
 ```c
-if(TEST) {
+if (TEST) {
   CODE;
-} else if(TEST) {
+} else if (TEST) {
   CODE;
-}else{
+} else {
   CODE;
 }
 ```
@@ -166,11 +166,11 @@ while (TEST) {
 
 do {
   CODE;
-} while(TEST);
+} while (TEST);
 ```
 
 ```c
-for(INIT; TEST; POST) {
+for (INIT; TEST; POST) {
   CODE;
 }
 ```
