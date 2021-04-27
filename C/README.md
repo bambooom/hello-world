@@ -42,7 +42,9 @@ Hello!
 ```
 
 ### Do not use IDE
-The book said so, I will try to use vim although I'm really not good at it.
+The book said so, but for me it's kind of too hard to use unfamiliar editor.
+I will stick to vscode for now.
+Maybe I will try to use vim later as I'm really not good at it.
 
 ## Debugging intro (from ex4)
 Use `gdb` on Linux, use `lldb` on OSX.
@@ -71,6 +73,7 @@ List the quick reference of `lldb` here since I only have OSX now.
 ## Memorizing operators (ex5)
 > only copy those operators I'm not familiar with here:
 
+> https://www.tutorialspoint.com/cprogramming/c_operators.htm
 ### Logical Operators
 - `&` bitwise and
 - `|` bitwise or
@@ -225,3 +228,7 @@ union NAME {
   ELEMENTS ;
 } [VARIABLE_NAME] ;
 ```
+
+## Data Types
+
+> https://en.wikipedia.org/wiki/C_data_types
