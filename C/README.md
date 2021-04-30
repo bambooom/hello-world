@@ -9,7 +9,7 @@ clang: error: no input files
 $ cc
 clang: error: no input files
 $ cc --version
-Apple clang version 12.0.0 (clang-1200.0.32.27)
+Apple clang version 12.0.5 (clang-1205.0.22.9)
 Target: x86_64-apple-darwin20.3.0
 Thread model: posix
 InstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin
