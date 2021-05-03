@@ -232,3 +232,27 @@ union NAME {
 ## Data Types
 
 > https://en.wikipedia.org/wiki/C_data_types
+
+## Function declaration: K&R vs ANSI syntax
+
+> K&R syntax is obsolete, you can skip it unless you have to maintain very old code.
+
+```c
+// K&R syntax
+int foo(a, p)
+    int a;
+    char *p;
+{
+    return 0;
+}
+
+// ANSI syntax
+int foo(int a, char *p)
+{
+    return 0;
+}
+```
+ref:
+* [c - Function declaration: K&R vs ANSI - Stack Overflow](https://stackoverflow.com/questions/3092006/function-declaration-kr-vs-ansi)
+* [Alternative (K&R) C syntax for function declaration versus prototypes - Stack Overflow](https://stackoverflow.com/questions/1630631/alternative-kr-c-syntax-for-function-declaration-versus-prototypes)
+* [kr c - What are the major differences between ANSI C and K&R C? - Stack Overflow](https://stackoverflow.com/questions/22500/what-are-the-major-differences-between-ansi-c-and-kr-c)
