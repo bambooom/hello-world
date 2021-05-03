@@ -253,6 +253,14 @@ int foo(int a, char *p)
 }
 ```
 ref:
-* [c - Function declaration: K&R vs ANSI - Stack Overflow](https://stackoverflow.com/questions/3092006/function-declaration-kr-vs-ansi)
-* [Alternative (K&R) C syntax for function declaration versus prototypes - Stack Overflow](https://stackoverflow.com/questions/1630631/alternative-kr-c-syntax-for-function-declaration-versus-prototypes)
-* [kr c - What are the major differences between ANSI C and K&R C? - Stack Overflow](https://stackoverflow.com/questions/22500/what-are-the-major-differences-between-ansi-c-and-kr-c)
+* [c - Function declaration: K&R vs ANSI](https://stackoverflow.com/questions/3092006/function-declaration-kr-vs-ansi)
+* [Alternative (K&R) C syntax for function declaration versus prototypes](https://stackoverflow.com/questions/1630631/alternative-kr-c-syntax-for-function-declaration-versus-prototypes)
+* [kr c - What are the major differences between ANSI C and K&R C?](https://stackoverflow.com/questions/22500/what-are-the-major-differences-between-ansi-c-and-kr-c)
+
+## Pointer Lexicon
+- `type *ptr` A pointer of type named ptr
+- `*ptr` The value of whatever ptr is pointed at
+- `*(ptr + i)` The value of (whatever ptr is pointed at plus i)
+- `&thing` The address of thing
+- `type *ptr = &thing` A pointer of type named ptr set to the address of thing
+- `ptr++` Increment where ptr points, all pointers are just integers, a very large one
