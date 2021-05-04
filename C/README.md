@@ -301,4 +301,4 @@ and then only use pointers as a performance optimization if you absolutely have 
 - `ptr++` Increment where ptr points, all pointers are just integers, a very large one
 
 ### What doesn't work the same on pointers and arrays
-- `sizeof(cur_age)` get the size of the pointer, not the size of what it points ar.
+- `sizeof(cur_age)` get the size of the pointer, not the size of what it points at.
