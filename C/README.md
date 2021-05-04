@@ -257,10 +257,48 @@ ref:
 * [Alternative (K&R) C syntax for function declaration versus prototypes](https://stackoverflow.com/questions/1630631/alternative-kr-c-syntax-for-function-declaration-versus-prototypes)
 * [kr c - What are the major differences between ANSI C and K&R C?](https://stackoverflow.com/questions/22500/what-are-the-major-differences-between-ansi-c-and-kr-c)
 
-## Pointer Lexicon
+## Pointers
+> `ages[i]`:
+> To C, `ages` is a location in the computer's memory where all of these integers start.
+> It's also an address, and the C compiler will replace `ages` anywhere you type it with the address of the very first integer in `ages`.
+> Another way to think of `ages` is that it's the "address of the first integer in `ages`".
+> But here's the trick: `ages` is an address inside the entire computer.
+> It's not like `i` that's just an address inside `ages`.
+> The `ages` array name is actually an address in the computer.
+
+> C thinks your whole computer is one massive array of bytes.
+> Obviously, this isn't very useful, but then what C does is layer on top of this massive array of bytes the concept of *types* and *sizes* of those types.
+> how C is doing the following with your arrays:
+> - Creating a block of memory inside your computer
+> - Pointing the name `ages` at the beginning of that block
+> - Indexing into the block by taking the base address of `ages` and getting the element that's `i` away from there
+> - Converting that address at `ages+i` into a valid `int` of the right size, such that the index works to return what you want: the int at index i
+
+> A pointer is simply an address pointing somewhere inside the computer’s memory with a type specifier so that you get the right size of data with it.
+
+> It’s kind of like a combination of ages and i rolled into one data type. C knows where pointers are pointing, knows the data type they point at, the size of those types, and how to get the data for you. Just like with i, you can increment, decrement, subtract, or add to them. But, just like ages, you can also get values out, put new values in, and use all of the array operations.
+
+> A pointer gives you raw, direct access to a block of memory so you can work with it.
+
+### Practical Pointer Usage
+four primary useful things you can do with pointers in C code:
+- Ask the OS for a chunk of memory and use a pointer to work with it. This includes strings
+and `structs`.
+- Pass large blocks of memory (like large `structs`) to functions with a pointer, so you don't
+have to pass the whole thing to them.
+- Take the address of a function, so you can use it as a dynamic callback.
+- Scan complex chunks of memory, converting bytes off of a network socket into data structures or parsing files
+
+Nowadays, compilers performance is good enough. So you should go with arrays anytime you can,
+and then only use pointers as a performance optimization if you absolutely have to.
+
+### Pointer Lexicon
 - `type *ptr` A pointer of type named ptr
 - `*ptr` The value of whatever ptr is pointed at
 - `*(ptr + i)` The value of (whatever ptr is pointed at plus i)
 - `&thing` The address of thing
 - `type *ptr = &thing` A pointer of type named ptr set to the address of thing
 - `ptr++` Increment where ptr points, all pointers are just integers, a very large one
+
+### What doesn't work the same on pointers and arrays
+- `sizeof(cur_age)` get the size of the pointer, not the size of what it points ar.

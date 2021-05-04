@@ -23,14 +23,18 @@ int main(int argc, char *argv[])
   printf("---\n");
 
   // setup the pointers to the start of the arrays
-  int *cur_age = ages;
-  char **cur_name = names; // two level of pointer
+  int *cur_age = ages; // create pointer to integer type of pointer
+  // `char *` create a pointer to char, string is an array of chars
+  char **cur_name = names; // create a pointer that points to names
+  // `char *` is already a pointer to char => just a string
+  // need two levels since names is 2-dimensional => need char ** for a pointer to (a pointer to char) type.
 
   // second way using pointers
   for (i = 0; i < count; i++) {
     printf("%d: %p: %s has %d years old.\n", i, cur_name + i, // cur_name+i print out the real address
       *(cur_name + i), *(cur_age +i));
     // use * means get me the value, not commonly used
+    // *(cur_name + i) same as name[i]
   }
 
   int height = 100;
@@ -44,15 +48,17 @@ int main(int argc, char *argv[])
   for (i = 0; i < count; i++) {
     printf("%s has %d years old again.\n", cur_name[i], cur_age[i]);
     // pretend they are just arrays, modern ways
+    // syntax to access an element of an array is the same for a pointer and an array.
   }
 
   printf("---\n");
 
-  // 4th way with pointers om a stupid complex way
+  // 4th way with pointers om a stupid complex way, uses variaous pointer arithmetic methods
   // if need code very fast
-  for (cur_name = names, cur_age = ages;
-        (cur_age - ages) < count; cur_name++, cur_age++) {
-    printf("%s lived %d years so far.\n", *cur_name, *cur_age);
+  for (cur_name = names, cur_age = ages; // initialize by setting cur_name cur_age to the beginnning of names and ages
+        (cur_age - ages) < count; cur_name++, cur_age++) { // test portion: compares the **distance** of the pointer cur_age from the start of ages
+    printf("%p, %p: %s lived %d years so far.\n", cur_name, cur_age,  *cur_name, *cur_age);
+    // The pointers cur_name and cur_age are now pointing at one element of the arrays that they work on
   }
 
   return 0;
