@@ -61,5 +61,16 @@ int main(int argc, char *argv[])
     // The pointers cur_name and cur_age are now pointing at one element of the arrays that they work on
   }
 
+  printf("---\n");
+  // start at the end of arrays and go to beginning
+  // for pointer to works in this loop, need to reset them to point to the beginning of the names and ages
+  // as in the previous loop, they have been already moved to the end address of the arrays
+  for (i = count - 1, cur_name = names, cur_age = ages; i >= 0; i--) {
+    printf("%d: %s has %d years old again. %p, %p\n", i, names[i], ages[i], &names[i], &ages[i]); // this works
+    printf("%d: %s has %d years old again.\n", i, cur_name[i], cur_age[i]);
+    printf("%d: %s has %d years old again.\n", i, *(cur_name + i), *(cur_age + i));
+
+  }
+
   return 0;
 }
