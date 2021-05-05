@@ -299,6 +299,7 @@ and then only use pointers as a performance optimization if you absolutely have 
 - `&thing` The address of thing
 - `type *ptr = &thing` A pointer of type named ptr set to the address of thing
 - `ptr++` Increment where ptr points, all pointers are just integers, a very large one
+- `ptr->elem` Use ptr to struct/union to get elem
 
 ### What doesn't work the same on pointers and arrays
 - `sizeof(cur_age)` get the size of the pointer, not the size of what it points at.
