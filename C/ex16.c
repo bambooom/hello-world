@@ -17,14 +17,21 @@ struct Person *Person_create(char *name, int age, int height, int weight)
 {
   // malloc: memory allocator, gives chunk of memory with size
   struct Person *who = malloc(sizeof(struct Person));
-  assert(whi != NULL);
+  assert(who != NULL); // expression is true, assert do nothing, if false, abort and terminating the program
 
   // if not using ->, then need to deref who and use dot . to accsess name
   // (*who).name = strdup(name);
-  who->name = strdup(name);
-  who->age = age;
-  who->height = height;
-  who->weight = weight;
+  // strdup: save a copy of a string
+  // who->name = strdup(name);
+  // who->age = age;
+  // who->height = height;
+  // who->weight = weight;
+
+  // same as -> syntax
+  (*who).name = strdup(name);
+  (*who).age = age;
+  (*who).height = height;
+  (*who).weight = weight;
 
   return who;
 }
@@ -32,7 +39,8 @@ struct Person *Person_create(char *name, int age, int height, int weight)
 void Person_destroy(struct Person *who)
 {
   assert(who != NULL); // abort if who=NULL false
-  free(who->name); // need to free memory by yourself
+  free(who->name); // need to free memory by yourself, no garbage collection system like in Python
+  // if deref a NULL, will blows up, segfault
   free(who);
 }
 
@@ -56,6 +64,14 @@ int main(int argc, char *argv[])
   printf("Joe is at memory location %p:\n", joe);
   Person_print(joe);
   printf("Frank is at memory location %p: \n", frank);
+
+
+  // Person_print(NULL); //this will segfault with EXC_BAD_ACCESS as inside Person_print, try to access who->name
+
+  // free(frank) clear the memory of what frank (a pointer) is point to, not make frank itself to be NULL
+  // and then it will output malloc error: pointer being freed was not allocated
+  // but not easy to find out in C
+  // free(frank);
   Person_print(frank);
 
   // make everyone age 20 years and print them again
@@ -70,8 +86,10 @@ int main(int argc, char *argv[])
 
   // desctroy them bothe so we clean up
   Person_destroy(joe);
-  // Person_destroy(NULL);
+  // Person_destroy(NULL); // will assertion failed
   Person_destroy(frank);
+  // if forget to destroy them, can try Valgrind debugger to check
+  // it should report that you forgot to free the memory
 
   return 0;
 }
