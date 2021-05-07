@@ -303,3 +303,30 @@ and then only use pointers as a performance optimization if you absolutely have 
 
 ### What doesn't work the same on pointers and arrays
 - `sizeof(cur_age)` get the size of the pointer, not the size of what it points at.
+
+## Heap vs Stack Allocation (from ex17)
+
+C is using real CPU's actual machinery, that involves a chunk of RAM called the stack and heap.
+The difference depends on where you get the storage.
+
+The **heap** is all the remaining memory in computer, and you access it with `malloc` to get more.
+Each time call `malloc`, OS uses internal functions to register that piece of memory to you,
+and then returns a pointer to it. Need to `free` to return to OS.
+Not doing `free` will cause memory leak.
+
+The **stack** is special region of memory that stores temporary variables,
+which each function creates as locals to that function.
+Each argument to a function is pushed onto the stack and then used inside the function.
+It's really a stack data structure, so the last thing in is the first thing out.
+The advantage of using a stack for this is simply that when the function exits,
+the C compiler pops these variables off of the stack to clean up, to prevent memory leaks.
+
+> If you didn't get it from malloc, or a function that got it from malloc, then it's on the stack.
+
+3 primary problems:
+- If you get a block of memory from `malloc`, and have that pointer on the stack, then when the function exits the pointer will get popped off and lost.
+- If you put too much data on the stack (like large structs and arrays), then you can cause a stack overflow and the program will abort. In this case, use the heap with `malloc`.
+- If you take a pointer to something on the stack, and then pass or return it from your function, then the function receiving it will segmentation fault (segfault), because the actual data will get popped off and disappear. You'll be pointing at dead space.
+
+when a program exits, the OS will clean up all of the resources for you, but sometimes not immediately.
+A common idiom is to just abort and let the OS clean up on error.
