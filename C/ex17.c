@@ -6,18 +6,19 @@
 #include <errno.h>
 #include <string.h>
 
+// use C preprocessor (CPP) to create constant settings, reliable ways
 #define MAX_DATA 512
 #define MAX_ROWS 100
 
 struct Address {
   int id;
   int set;
-  char name[MAX_DATA];
+  char name[MAX_DATA]; // fixed in size
   char email[MAX_DATA];
 };
 
 struct Database {
-  struct Address rows[MAX_ROWS]; // not pointer, will be 100 Address
+  struct Address rows[MAX_ROWS]; // not pointer, will be 100 Address, fixed size
 };
 
 struct Connection {
@@ -25,9 +26,12 @@ struct Connection {
   struct Database *db;
 };
 
-void die(const char (message))
+// die: used to kill and exit the program with an error
+void die(const char *message)
 {
+  // set external variable error for error return from a function
   if (errno) {
+    // the print the error message
     perror(message);
   } else {
     printf("ERROR: %s\n", message);
@@ -40,6 +44,8 @@ void Address_print(struct Address *addr)
 {
   printf("%d %s %s\n", addr->id, addr->name, addr->email);
 }
+
+// FILE functions: fopen, fread, fclose, rewind, works on FILE struct, defined in C standard lib
 
 void Database_load(struct Connection *conn)
 {
@@ -55,6 +61,7 @@ struct Connection *Database_open(const char *filename, char mode)
   if (!conn)
     die("Memory error");
 
+  // allocating large data on the heap
   conn->db = malloc(sizeof(struct Database));
   if (!conn->db)
     die("Memory error");
@@ -62,13 +69,14 @@ struct Connection *Database_open(const char *filename, char mode)
   if(mode == 'c') {
     conn->file = fopen(filename, "w");
   } else {
-    conn->file = fopen(filename, "r");
+    conn->file = fopen(filename, "r+"); // need r+, otherwise, cannot write
 
     if (conn -> file) {
       Database_load(conn);
     }
   }
 
+  // NULL is 0, so boolean works, NULL will evaluate to false
   if (!conn->file)
     die("Failed to open the file");
 
@@ -103,19 +111,22 @@ void Database_create(struct Connection *conn)
 {
   int i = 0;
   // it's on stack, no pointers
-  for (i = 0; i < MAX_ROWS, i++) {
+  for (i = 0; i < MAX_ROWS; i++) {
     // make a protortype to initialize it
     struct Address addr = {.id = i, .set = 0};
     // then just assign it
-    conn->dn->rows[i] = addr;
+    conn->db->rows[i] = addr;
   }
 }
 
-void Database_set(struct Connection *conn, int id, const chat *name, const char *email)
+void Database_set(struct Connection *conn, int id, const char *name, const char *email)
 {
+  // "get the i element of rows, which is in db, which is in conn, then get the address of (&) it"
   struct Address *addr = &conn->db->rows[id];
-  if (addr->set)
+  if (addr->set) {
+    printf("%d, %s %s\n", id, addr->name, addr->email);
     die("Already set, delete it first");
+  }
 
   addr->set = 1;
 
@@ -143,6 +154,10 @@ void Database_get(struct Connection *conn, int id)
 
 void Database_delete(struct Connection *conn, int id)
 {
+  // temporary local Address, initializing its id and set fields,
+  // and then simply copying it into the rows array by assigning it to the element I want
+  // this makes sure that all fields except set and id are initialized to zeros
+  // shouldn't use `memcpy` to do these kind of struct copying operations
   struct Address addr = {.id = id, .set = 0};
   conn->db->rows[id] = addr;
 }
@@ -169,9 +184,9 @@ int main(int argc, char *argv[])
   char *filename = argv[1];
   char action = argv[2][0];
   struct Connection *conn = Database_open(filename, action);
-  ind id = 0;
+  int id = 0;
 
-  if (argc < 3) id = atoi(argv[3]);
+  if (argc > 3) id = atoi(argv[3]); // `atoi` convert string to int
   if (id >= MAX_ROWS) die("There's not that many records.");
 
   switch (action) {
