@@ -330,3 +330,25 @@ the C compiler pops these variables off of the stack to clean up, to prevent mem
 
 when a program exits, the OS will clean up all of the resources for you, but sometimes not immediately.
 A common idiom is to just abort and let the OS clean up on error.
+
+## Pointers to Functions (from ex18)
+```c
+int (*POINTER_NAME)(int a, int b)
+```
+
+- Write normal function declaration: `int callme(int a, int b)`
+- Wrap the function name with the pointer syntax: `int (*callme)(int a, int b)`
+- Change the name to the pointer name: `int (*compare_cb)(int a, int b)`
+
+Then the variable name of the pointer is `compare_cb`,
+but you can use it like it's a function.
+
+Also works even if the function pointer returns a pointer to something:
+- Write it: `char *make_coolness(int awesome_levels)`
+- Wrap it: `char *(*make_coolness)(int awesome_levels)`, wrap the name only, outer `*` indicates that its return value is pointer
+- Rename it: `char *(*coolness_cb)(int awesome_levels)`
+
+To pass the function pointer to another function as parameters, need to use `typedef`,
+which is a C keyword for making new names for other more complex types.
+So after this `typedef int (*compare_cb) (int a, int b);`,
+use the name `compare_cb` like it's a type.
