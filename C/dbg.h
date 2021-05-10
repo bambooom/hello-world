@@ -44,3 +44,6 @@
     errno=0; goto error; }
 
 #endif
+
+// https://gcc.gnu.org/onlinedocs/cpp/Standard-Predefined-Macros.html
+// learn some predifined macros, __FILE__, __LINE__ etc
