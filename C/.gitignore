@@ -6,6 +6,7 @@
 !*.md
 !Makefile
 !*/Makefile
+!*.h
 
 # Prerequisites
 *.d
