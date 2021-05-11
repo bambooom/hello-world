@@ -148,6 +148,9 @@ int main(int argc, char *argv[])
   // this will print something like: 55:48:89:e5:89:7d:fc:89:75:f8:8b:45:fc:3b:45:f8:0f:9f:c1:80:e1:01:0f:b6:c1:
   // they are raw assembler byte code of the function itself
   // on Mac, can use an app called Hex Find to open ex18 to find the above sequence
+
+  destroy(sorted_order); // debug this in ex20
+
   printf("REVERSE: ");
   dump(reverse_order); // beginning is same as the above, but should has different endings
 

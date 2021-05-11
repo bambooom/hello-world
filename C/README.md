@@ -352,3 +352,14 @@ To pass the function pointer to another function as parameters, need to use `typ
 which is a C keyword for making new names for other more complex types.
 So after this `typedef int (*compare_cb) (int a, int b);`,
 use the name `compare_cb` like it's a type.
+
+## Debug tactics (from ex20)
+1. You can't debug code by just looking at it.
+2. Repeat the bug with an automated tes.
+3. Run the progream under a debugger and valgrind and lint.
+4. Find the backtrace and print out all the variables on the path.
+5. Once you fix it, add check() to prevent it.
+
+enable core dump on MacOS:
+- https://steipete.com/posts/how-to-macos-core-dump/
+- https://stackoverflow.com/questions/9412156/how-to-generate-core-dumps-in-mac-os-x
