@@ -233,6 +233,8 @@ union NAME {
 
 > https://en.wikipedia.org/wiki/C_data_types
 
+[Notes](./advanced-data-types.md)
+
 ## Function declaration: K&R vs ANSI syntax
 
 > K&R syntax is obsolete, you can skip it unless you have to maintain very old code.
