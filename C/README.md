@@ -365,3 +365,6 @@ use the name `compare_cb` like it's a type.
 enable core dump on MacOS:
 - https://steipete.com/posts/how-to-macos-core-dump/
 - https://stackoverflow.com/questions/9412156/how-to-generate-core-dumps-in-mac-os-x
+
+## Rules to following realted to the stack (from ex22)
+-> [here](./ex22-stack-scope-globals/README.md)
