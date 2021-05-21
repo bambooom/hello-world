@@ -9,3 +9,9 @@ like `get_age`. Not apply to constants as those are read-only. Talking about var
 - When in doubt, put it on the heap. Just create things with `malloc`.
 - Don't use function static variables like `update_ratio`. Not very useful and cause pain.
 - Avoid reusing function parameters. It's confusing whether you're just reusing it or if you think you're changing the caller's version of it.
+
+## Passing by Value vs. by Reference
+
+Pass by value means the actual value is passed on. Pass by reference means a number (called an address) is passed on which defines where the value is stored.
+
+Ref: https://www.educative.io/edpresso/pass-by-value-vs-pass-by-reference

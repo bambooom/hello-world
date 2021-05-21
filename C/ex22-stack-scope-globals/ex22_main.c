@@ -45,6 +45,20 @@ int main(int argc, char *argv[])
 
   // test the scope demo
   int count = 4;
+
+  /**
+    static int count = 4;
+    count = 6;
+
+    // above is ok, static variable can be changed
+  */
+  /**
+    const int count = 4;
+    count = 6;
+
+    // above has error, `cannot assign to variable 'count' with const-qualified type 'const int'`
+  */
+
   scope_demo(count); // 4, 4, 3000
   scope_demo(count * 20); // 80, 100(in if scope), 80, 3000
 
