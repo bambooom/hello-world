@@ -368,3 +368,19 @@ enable core dump on MacOS:
 
 ## Rules to following realted to the stack (from ex22)
 -> [here](./ex22-stack-scope-globals/README.md)
+
+## I/O functions should look up (from ex24)
+- fscanf
+- fgets
+- fopen
+- freopen
+- fdopen
+- fclose
+- fcloseall
+- fgetpos
+- fseek
+- ftell
+- rewind
+- fprintf
+- fwrite
+- fread

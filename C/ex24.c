@@ -31,10 +31,15 @@ int main(int argc, char *argv[])
   printf("What's your First Name? ");
   // fgets: reads string from input (in this case, from stdin), and with a max size
   // syntax: fgets(char * restrict str, int size, FILE * restrict stream);
+  // in = gets(you.first_name); // will get unsafe warning, do not use this func
   in = fgets(you.first_name, MAX_DATA - 1, stdin);
+  // 1) do not use broken `gets`, use `fgets`
+  // 2) problem when using fscanf for string, as cannot specify the max buffer size for it
+  // this will crash and eat up last name part
+  // in = fscanf(stdin, "%50s", you.first_name);
   check(in != NULL, "Failed to read first name.");
 
-  printf("What's your Lasst Name? ");
+  printf("What's your Last Name? ");
   in = fgets(you.last_name, MAX_DATA - 1, stdin);
   check(in != NULL, "Failed to read last name.");
 
