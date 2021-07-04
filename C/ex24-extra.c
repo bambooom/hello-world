@@ -1,6 +1,7 @@
-// ex24: Input, Output, Files
+// not using fscnaf, use fgets only
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "dbg.h"
 
 #define MAX_DATA 100
@@ -29,14 +30,7 @@ int main(int argc, char *argv[])
   char *in = NULL;
 
   printf("What's your First Name? ");
-  // fgets: reads string from input (in this case, from stdin), and with a max size
-  // syntax: fgets(char * restrict str, int size, FILE * restrict stream);
-  // in = gets(you.first_name); // will get unsafe warning, do not use this func
   in = fgets(you.first_name, MAX_DATA - 1, stdin);
-  // 1) do not use broken `gets`, use `fgets`
-  // 2) problem when using fscanf for string, as cannot specify the max buffer size for it
-  // this will crash and eat up last name part
-  // in = fscanf(stdin, "%50s", you.first_name);
   check(in != NULL, "Failed to read first name.");
 
   printf("What's your Last Name? ");
@@ -44,12 +38,10 @@ int main(int argc, char *argv[])
   check(in != NULL, "Failed to read last name.");
 
   printf("How old are you? ");
-  // scanf is inverse of printf, reads/scans input based on a format
-  // syntax: fscanf(FILE *restrict stream, const char *restrict format, ...);
-  // have to give the address of `you.age` so that fscanf has a pointer to it and can modify it
-  int rc = fscanf(stdin, "%d", &you.age);
-  // int rc = scanf("%d", &you.age); // same with the prev line, no need to specify reading from stdin
-  check(rc > 0, "You have to entrer a number.");
+  char age;
+  in = fgets(&age, MAX_DATA - 1, stdin);
+  you.age = atoi(&age); // atoi convert string to int
+  check(you.age > 0, "You have to entrer a number.");
 
   printf("What color are your eyes:\n");
   for (i = 0; i <= OTHER_EYES; i++) {
@@ -57,16 +49,19 @@ int main(int argc, char *argv[])
   }
   printf("> ");
 
-  int eyes = -1;
-  rc = fscanf(stdin, "%d", &eyes);
-  check(rc > 0, "You have to enter a number.");
+  char eyes;
+  in = fgets(&eyes, MAX_DATA - 1, stdin);
+  eyes = atoi(&eyes);
+  check(eyes > 0, "You have to enter a number.");
 
   you.eyes = eyes - 1;
   check(you.eyes <= OTHER_EYES && you.eyes >= 0, "Do it right, that's not an option.");
 
   printf("How much do you make an hour? ");
-  rc = fscanf(stdin, "%f", &you.income);
-  check(rc > 0, "Enter a floating point number.");
+  char income;
+  in = fgets(&income, MAX_DATA - 1, stdin);
+  you.income = atof(&income); // atoi convert string to float
+  check(you.income > 0, "Enter a floating point number.");
 
   printf("----- RESULTS -----\n");
 
@@ -80,3 +75,9 @@ int main(int argc, char *argv[])
 error:
   return -1;
 }
+
+// scanf() function reads input from the standard input stream stdin,
+// scanf(const char *restrict format, ...);
+
+// fscanf() reads input from the stream pointer stream
+// fscanf(FILE *restrict stream, const char *restrict format, ...);
