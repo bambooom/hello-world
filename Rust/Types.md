@@ -44,3 +44,15 @@ fn main() {
     let y: f32 = 3.0; // f32
 }
 ```
+
+## Declare variables
+
+```rust
+// let <variable_name>: <type> = <expression>;
+let x: u32 = 42;
+
+// type inference
+let y = 42;
+let z: u32 = y;
+// compiler infers the type of y to be u32
+```
