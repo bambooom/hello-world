@@ -2,7 +2,11 @@
 /// calculate the average speed of the journey.
 fn speed(start: u32, end: u32, time_elapsed: u32) -> u32 {
     // TODO: Panic with a custom message if `time_elapsed` is 0
-
+    if time_elapsed == 0 {
+        // A panic is Rust's way to signal that something went so wrong that the program can't continue executing, it's an unrecoverable error
+        // intentially trigger a pania by calling panic! macro
+        panic!("The journey took no time at all. That's impossible!");
+    }
     (end - start) / time_elapsed
 }
 
