@@ -1,5 +1,8 @@
 # Types
 
+Rust is a **statically typed language**.
+Every single value in Rust has a type and that type must be known to the compiler at compile-time.
+
 ## Primitive types
 
 ## Integers
@@ -55,4 +58,90 @@ let x: u32 = 42;
 let y = 42;
 let z: u32 = y;
 // compiler infers the type of y to be u32
+```
+
+### Function arguments
+
+`greeting` has no input parameters and returns a reference to a string slice (`&'static str`).
+
+```rust
+// `fn` <function_name> ( <input params> ) -> <return_type> { <body> }
+fn greeting() -> &'static str {
+    // TODO: fix me 👇
+    "I'm ready to __!"
+}
+```
+
+```rust
+// Spelling out the unit return type explicitly
+//                   👇
+fn test_welcome() -> () {
+    assert_eq!(greeting(), "I'm ready to learn Rust!");
+}
+
+// return type can be omitted if it doesn't return anything
+fn test_welcome() {
+    assert_eq!(greeting(), "I'm ready to learn Rust!");
+}
+```
+
+```rust
+// better to omit return keywork when possible
+fn greeting() -> &'static str {
+    // This is the last expression in the function
+    // Therefore its value is returned by `greeting`
+    "I'm ready to learn Rust!"
+}
+
+// can also use `return` keyword
+fn greeting() -> &'static str {
+    // Notice the semicolon at the end of the line!
+    return "I'm ready to learn Rust!";
+}
+```
+
+```rust
+// An input parameter, type &str (a string slice)
+//        👇
+fn greet(name: &str) -> String {
+    format!("Hello, {}!", name)
+}
+```
+
+## Booleans
+
+if/else if/else
+
+```rust
+let number = 3;
+
+if number < 5 {
+    println!("`number` is smaller than 5");
+} else if number >= 3 {
+    println!("`number` is greater than or equal to 3, but smaller than 5");
+} else {
+    println!("`number` is smaller than 3");
+}
+```
+
+```rust
+let number = 3;
+if number {
+    // ERROR here: If the condition is not a boolean, you'll get a compilation error
+    println!("`number` is not zero");
+}
+```
+
+In Rust, if expressions are expressions, not statements: they return a value.
+That value can be assigned to a variable or used in other expressions.
+Like ternary operator in JS.
+
+```rust
+let number = 3;
+let message = if number < 5 {
+    "smaller than 5"
+} else {
+    "greater than or equal to 5"
+};
+// message is now "smaller than 5"
 ```
