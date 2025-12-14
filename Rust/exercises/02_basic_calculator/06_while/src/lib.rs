@@ -4,7 +4,18 @@ pub fn factorial(n: u32) -> u32 {
     // interprets as "I'll get back to this later", thus
     // suppressing type errors.
     // It panics at runtime.
-    todo!()
+    // todo!()
+
+
+    // variables in Rust are immutable by default
+    // need to use `mut` to allow modifications
+    let mut result = 1;
+    let mut i = 1;
+    while i <= n {
+        result *= i;
+        i += 1;
+    }
+    result
 }
 
 #[cfg(test)]
