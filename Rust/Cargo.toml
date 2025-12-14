@@ -1,3 +1,13 @@
+# Profile settings can be changed in Cargo.toml with the [profile] table.
+
+[profile.dev]
+opt-level = 1               # Use slightly better optimizations.
+overflow-checks = false     # Disable integer overflow checks.
+
+[profile.release]
+overflow-checks = true     # Enable integer overflow checks.
+
+
 [workspace]
 members = [
   "exercises/*/*",

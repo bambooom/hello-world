@@ -1,3 +1,21 @@
+// When the result of an arithmetic operation is bigger than the maximum value for a given integer type, we are talking about an integer overflow.
+// you can reject the operation via `panic!`
+// or you can wrap around, e.g.:
+//  - If you do a wrapping addition between 1 and 255 (=u8::MAX), the result is 0 (=u8::MIN).
+//  - If you're working with signed integers, the same principle applies. E.g. adding 1 to 127 (=i8::MAX) with wrapping will give you -128 (=i8::MIN).
+//
+// can choose to configure the profile setting:
+// If `overflow-checks` is set to true, Rust will panic at runtime when an integer operation overflows.
+// If `overflow-checks` is set to false, Rust will wrap around when an integer operation overflows.
+
+// Cargo provides 4 built-in profiles: dev, release, test, and bench
+// The dev profile is used every time you run cargo build, cargo run or cargo test. It's aimed at local development
+// The release profile, instead, is optimized for runtime performance but incurs longer compilation times.
+//
+// By default, overflow-checks is set to:
+// true for the dev profile
+// false for the release profile
+
 // Customize the `dev` profile to wrap around on overflow.
 // Check Cargo's documentation to find out the right syntax:
 // https://doc.rust-lang.org/cargo/reference/profiles.html
