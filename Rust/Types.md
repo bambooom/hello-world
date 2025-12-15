@@ -171,3 +171,34 @@ for i in 1..(end + 1) {
     sum += i;
 }
 ```
+
+## Conversions
+
+You can use the as operator to convert between integer types.
+`as` conversions are infallible.
+
+```rust
+let a: u32 = 10;
+
+// Cast `a` into the `u64` type
+let b = a as u64;
+
+// You can use `_` as the target type
+// if it can be correctly inferred
+// by the compiler. For example:
+let c: u64 = a as _;
+```
+
+```rust
+// A number that's too big
+// to fit into a `u8`
+let a: u16 = 255 + 1;
+let b = a as u8;
+
+// will perform truncation, Rust compiler will keep the last 8 bits of a u16 memory representation:
+// 0 0 0 0 0 0 0 1 0 0 0 0 0 0 0 0 -> 0 0 0 0 0 0 0 0  (last 8 bits)
+// Hence 256 as u8 is equal to 0. That's... not ideal, in most scenarios.
+// In fact, the Rust compiler will actively try to stop you if it sees you trying to cast a literal value which will result in a truncation:
+```
+
+Use it exclusively for going from a smaller type to a larger type. To convert from a larger to smaller integer type, rely on the fallible conversion machinery
