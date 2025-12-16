@@ -202,3 +202,70 @@ let b = a as u8;
 ```
 
 Use it exclusively for going from a smaller type to a larger type. To convert from a larger to smaller integer type, rely on the fallible conversion machinery
+
+## Strings
+
+> https://doc.rust-lang.org/std/string/struct.String.html
+
+## Structs
+
+like class or object in other languages
+
+```rust
+struct Ticket {
+    title: String,
+    description: String,
+    status: String
+}
+
+// Syntax: <StructName> { <field_name>: <value>, ... }
+let ticket = Ticket {
+    title: "Build a ticket system".into(),
+    description: "A Kanban board".into(),
+    status: "Open".into()
+};
+
+// Field access
+let x = ticket.description;
+
+// attach behaviour to structs by defining methods
+impl Ticket {
+    fn is_open(self) -> bool {
+        // self as their first parameter
+        // self is a keyword and represents the instance of the struct the method is being called on.
+        self.status == "Open"
+    }
+}
+
+// Syntax:
+// impl <StructName> {
+//    fn <method_name>(<parameters>) -> <return_type> {
+//        // Method body
+//    }
+// }
+
+// Method call syntax: <instance>.<method_name>(<parameters>)
+let is_open = ticket.is_open();
+
+// Static methods, doesn't take self as its first parameter
+struct Configuration {
+    version: u32,
+    active: bool
+}
+
+impl Configuration {
+    // `default` is a static method on `Configuration`
+    fn default() -> Configuration {
+        Configuration { version: 0, active: false }
+    }
+}
+
+// Function call syntax: <StructName>::<method_name>(<parameters>)
+let default_config = Configuration::default();
+
+// use function call syntax for both:
+// Function call syntax:
+//   <StructName>::<method_name>(<instance>, <parameters>)
+let is_open = Ticket::is_open(ticket);
+// clear what is first parameter, prefer method call syntax when possible
+```
