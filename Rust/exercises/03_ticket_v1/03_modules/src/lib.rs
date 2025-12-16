@@ -1,6 +1,40 @@
+// module is a way to group related code together, under a common namespace
+//
+// inline modules:
+// #[cfg(test)]
+// mod tests {
+//     // [...]
+// }
+//
+// crate, root module
+//
+// mod dog;
+// -> If your module is declared in the root of your crate (e.g. src/lib.rs or src/main.rs), cargo expects the file to be named either:
+//      src/<module_name>.rs
+//      src/<module_name>/mod.rs
+//
+// importing like:
+// use crate::module_1::module_2::MyStruct;
+
+// // Now you can refer to `MyStruct` directly
+// fn a_function(s: MyStruct) {
+//      // [...]
+// }
+//
+// star import: discouraged generally
+// use crate::module_1::module_2::*;
+
+
+
+
+// use crate::Ticket; <- wrong
+
 mod helpers {
     // TODO: Make this code compile, either by adding a `use` statement or by using
     //  the appropriate path to refer to the `Ticket` struct.
+
+    // use crate::Ticket;
+    use super::Ticket; // only need to super to parent module, no need crate
 
     fn create_todo_ticket(title: String, description: String) -> Ticket {
         Ticket::new(title, description, "To-Do".into())

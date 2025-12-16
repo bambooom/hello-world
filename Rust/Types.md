@@ -203,6 +203,8 @@ let b = a as u8;
 
 Use it exclusively for going from a smaller type to a larger type. To convert from a larger to smaller integer type, rely on the fallible conversion machinery
 
+Reference: https://doc.rust-lang.org/reference/expressions/operator-expr.html#numeric-cast
+
 ## Strings
 
 > https://doc.rust-lang.org/std/string/struct.String.html
