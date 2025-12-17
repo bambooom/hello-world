@@ -1,3 +1,9 @@
+// In summary:
+// All Ticket fields are private
+// We provide a public constructor, Ticket::new, that enforces our validation rules on creation
+
+// Accessor methods are public methods that allow you to read the value of a private field (or fields) of a struct.
+
 pub mod ticket {
     pub struct Ticket {
         title: String,
@@ -30,10 +36,20 @@ pub mod ticket {
             }
         }
 
+        // Accessor methods
         // TODO: Add three public methods to the `Ticket` struct:
         //  - `title` that returns the `title` field.
         //  - `description` that returns the `description` field.
         //  - `status` that returns the `status` field.
+        pub fn title(self) -> String {
+            self.title
+        }
+        pub fn description(self) -> String {
+            self.description
+        }
+        pub fn status(self) -> String {
+            self.status
+        }
     }
 }
 

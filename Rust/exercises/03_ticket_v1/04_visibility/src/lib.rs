@@ -1,12 +1,26 @@
+// Visibility determines which regions of your code (or other people's code) can access a given entity, be it a struct, a function, a field, etc.
+// By default, everything in Rust is private.
+// A private entity can only be accessed:
+//  - within the same module where it's defined, or
+//  - by one of its submodules
+
+// You can modify the default visibility of an entity using a visibility modifier.
+// Some common visibility modifiers are:
+
+// pub: makes the entity public, i.e. accessible from outside the module where it's defined, potentially from other crates.
+// pub(crate): makes the entity public within the same crate, but not outside of it.
+// pub(super): makes the entity public within the parent module.
+// pub(in path::to::module): makes the entity public within the specified module.
+
 mod ticket {
-    struct Ticket {
+    pub struct Ticket {
         title: String,
         description: String,
         status: String,
     }
 
     impl Ticket {
-        fn new(title: String, description: String, status: String) -> Ticket {
+        pub fn new(title: String, description: String, status: String) -> Ticket {
             if title.is_empty() {
                 panic!("Title cannot be empty");
             }
@@ -55,7 +69,7 @@ mod tests {
         //
         // TODO: Once you have verified that the below does not compile,
         //   comment the line out to move on to the next exercise!
-        assert_eq!(ticket.description, "A description");
+        // assert_eq!(ticket.description, "A description");
     }
 
     fn encapsulation_cannot_be_violated() {
@@ -68,10 +82,10 @@ mod tests {
         //
         // TODO: Once you have verified that the below does not compile,
         //   comment the lines out to move on to the next exercise!
-        let ticket = Ticket {
-            title: "A title".into(),
-            description: "A description".into(),
-            status: "To-Do".into(),
-        };
+        // let ticket = Ticket {
+        //     title: "A title".into(),
+        //     description: "A description".into(),
+        //     status: "To-Do".into(),
+        // };
     }
 }

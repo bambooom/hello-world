@@ -33,17 +33,18 @@ impl Ticket {
             status,
         }
     }
-
-    pub fn title(self) -> String {
-        self.title
+    // reference to self as argument, rather than taking ownership of it
+    // so the returned value is a reference to the field rather than the field itself
+    pub fn title(&self) -> &String {
+        &self.title
     }
 
-    pub fn description(self) -> String {
-        self.description
+    pub fn description(&self) ->&String {
+        &self.description
     }
 
-    pub fn status(self) -> String {
-        self.status
+    pub fn status(&self) -> &String {
+        &self.status
     }
 }
 
