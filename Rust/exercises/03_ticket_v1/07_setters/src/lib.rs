@@ -1,3 +1,8 @@
+// Setter methods allow users to change the values of Ticket's private fields while making sure that its invariants are respected (i.e. you can't set a Ticket's title to an empty string).
+// There are two common ways to implement setters in Rust:
+// - Taking self as input.
+// - Taking &mut self as input.
+
 // TODO: Add &mut-setters to the `Ticket` struct for each of its fields.
 //   Make sure to enforce the same validation rules you have in `Ticket::new`!
 //   Even better, extract that logic and reuse it in both places. You can use
@@ -11,26 +16,38 @@ pub struct Ticket {
 
 impl Ticket {
     pub fn new(title: String, description: String, status: String) -> Ticket {
+        Self::validate_title(&title);
+        Self::validate_description(&description);
+        Self::validate_status(&status);
+
+        Ticket {
+            title,
+            description,
+            status,
+        }
+    }
+
+    fn validate_title(title: &str) {
         if title.is_empty() {
             panic!("Title cannot be empty");
         }
         if title.len() > 50 {
             panic!("Title cannot be longer than 50 bytes");
         }
+    }
+
+    fn validate_description(description: &str) {
         if description.is_empty() {
             panic!("Description cannot be empty");
         }
         if description.len() > 500 {
             panic!("Description cannot be longer than 500 bytes");
         }
+    }
+
+    fn validate_status(status: &str) {
         if status != "To-Do" && status != "In Progress" && status != "Done" {
             panic!("Only `To-Do`, `In Progress`, and `Done` statuses are allowed");
-        }
-
-        Ticket {
-            title,
-            description,
-            status,
         }
     }
 
@@ -44,6 +61,32 @@ impl Ticket {
 
     pub fn status(&self) -> &String {
         &self.status
+    }
+
+    // first approach, need to return the modified Ticket instance:
+    // pub fn set_title(mut self, new_title: String) -> Self {
+    //     // Validate the new title [...]
+    //     self.title = new_title;
+    //     self
+    // }
+
+
+    // mutable reference to self as input, no need to return anything
+    // but can't do chain multiple calls together
+    pub fn set_title(&mut self, new_title: String) {
+        Self::validate_title(&new_title);
+        self.title = new_title;
+    }
+    // call this like: ticket.set_title("A new title".into());
+
+    pub fn set_description(&mut self, new_description: String) {
+        Self::validate_description(&new_description);
+        self.description = new_description;
+    }
+
+    pub fn set_status(&mut self, new_status: String) {
+        Self::validate_status(&new_status);
+        self.status = new_status;
     }
 }
 
