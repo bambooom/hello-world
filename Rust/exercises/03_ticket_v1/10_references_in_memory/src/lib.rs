@@ -1,3 +1,9 @@
+// Most references1 in Rust are represented, in memory, as a pointer to a memory location.
+// It follows that their size is the same as the size of a pointer, a `usize`.
+//
+// assert_eq!(std::mem::size_of::<&String>(), 8);
+// assert_eq!(std::mem::size_of::<&mut String>(), 8);
+
 pub struct Ticket {
     title: String,
     description: String,
@@ -13,16 +19,18 @@ mod tests {
 
     #[test]
     fn u16_ref_size() {
-        assert_eq!(size_of::<&u16>(), todo!());
+        assert_eq!(size_of::<&u16>(), 8);
     }
 
     #[test]
     fn u64_mut_ref_size() {
-        assert_eq!(size_of::<&mut u64>(), todo!());
+        assert_eq!(size_of::<&mut u64>(), 8);
     }
 
     #[test]
     fn ticket_ref_size() {
-        assert_eq!(size_of::<&Ticket>(), todo!());
+        assert_eq!(size_of::<&Ticket>(), 8);
     }
 }
+
+// all above is a pointer, should be the same usize, 8 bytes
