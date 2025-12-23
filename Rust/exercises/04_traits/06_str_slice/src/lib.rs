@@ -31,15 +31,16 @@ impl Ticket {
         }
     }
 
-    pub fn title(&self) -> &String {
+    // $str, more freedom, somewhere there's a bunch of text data that a subset of it matches what we want
+    pub fn title(&self) -> &str {
         &self.title
     }
 
-    pub fn description(&self) -> &String {
+    pub fn description(&self) -> &str {
         &self.description
     }
 
-    pub fn status(&self) -> &String {
+    pub fn status(&self) -> &str {
         &self.status
     }
 }

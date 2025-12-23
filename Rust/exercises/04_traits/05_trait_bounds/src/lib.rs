@@ -6,7 +6,21 @@
 // collections (e.g. BTreeMap).
 
 /// Return the minimum of two values.
-pub fn min<T>(left: T, right: T) -> T {
+// pub fn min<T>(left: T, right: T) -> T
+// where
+//     T: PartialOrd,
+// {
+//     if left <= right {
+//         left
+//     } else {
+//         right
+//     }
+// }
+
+// solution
+// Ord: Trait for types that form a total order.
+pub fn min<T: Ord>(left: T, right: T) -> T
+{
     if left <= right {
         left
     } else {
