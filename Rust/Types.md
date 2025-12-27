@@ -271,3 +271,42 @@ let default_config = Configuration::default();
 let is_open = Ticket::is_open(ticket);
 // clear what is first parameter, prefer method call syntax when possible
 ```
+
+## enum
+
+An enumeration is a type that can have a fixed set of values, called variants.
+In Rust, you define an enumeration using the enum keyword:
+
+```rust
+enum Status {
+    ToDo,
+    InProgress,
+    Done,
+}
+```
+
+match on it
+
+```rust
+enum Status {
+    ToDo,
+    InProgress,
+    Done
+}
+
+impl Status {
+    fn is_done(&self) -> bool {
+        match self {
+            Status::Done => true,
+            // The `|` operator lets you match multiple patterns.
+            // It reads as "either `Status::ToDo` or `Status::InProgress`".
+            Status::InProgress | Status::ToDo => false
+        }
+    }
+}
+```
+
+A `match` statement that lets you compare a Rust value against a series of **patterns**.
+You can think of it as a type-level `if`.
+If `status` is a `Done` variant, execute the first block;
+if it's a `InProgress` or `ToDo` variant, execute the second block.
