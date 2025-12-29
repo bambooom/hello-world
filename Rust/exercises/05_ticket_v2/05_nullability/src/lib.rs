@@ -35,8 +35,19 @@ impl Ticket {
             status,
         }
     }
+
+    // Option is always like this?
+    // enum Option<T> {
+    //     Some(T),
+    //     None,
+    // }
+
+
     pub fn assigned_to(&self) -> Option<&String> {
-        todo!()
+        match &self.status {
+            Status::InProgress { assigned_to } => Some(assigned_to),
+            _ => None,
+        }
     }
 }
 
