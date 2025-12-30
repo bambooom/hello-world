@@ -374,3 +374,23 @@ fn parse_int(s: &str) -> Result<i32, ParseIntError> {
 That's the big advantage of Result: it makes fallibility explicit.
 
 Keep in mind, though, that panics exist. They aren't tracked by the type system, just like exceptions in other languages. But they're meant for unrecoverable errors and should be used sparingly.
+
+When you call a function that returns a Result, you have two key options:
+
+- Panic if the operation failed. This is done using either the unwrap or expect methods.
+
+```rust
+// Panics if `parse_int` returns an `Err`.
+let number = parse_int("42").unwrap();
+// `expect` lets you specify a custom panic message.
+let number = parse_int("42").expect("Failed to parse integer");
+```
+
+- Destructure the Result using a match expression to deal with the error case explicitly.
+
+```rust
+match parse_int("42") {
+    Ok(number) => println!("Parsed number: {}", number),
+    Err(err) => eprintln!("Error: {}", err),
+}
+```
