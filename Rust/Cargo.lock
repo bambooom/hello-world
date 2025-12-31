@@ -504,6 +504,9 @@ checksum = "2a2330da5de22e8a3cb63252ce2abb30116bf5265e89c0e01bc17015ce30a476"
 [[package]]
 name = "deps"
 version = "0.1.0"
+dependencies = [
+ "anyhow",
+]
 
 [[package]]
 name = "deref"
@@ -2422,6 +2425,7 @@ name = "thiserror_"
 version = "0.1.0"
 dependencies = [
  "common",
+ "thiserror 2.0.17",
 ]
 
 [[package]]
