@@ -15,7 +15,20 @@ pub fn fibonacci(n: u32) -> u32 {
     //
     // Hint: use a `Vec` to memoize the results you have already calculated
     // so that you don't have to recalculate them several times.
-    todo!()
+    if n == 0 {
+        0
+    } else if n == 1 {
+        1
+    } else {
+        // variable shadowing:
+        // In Rust, you can declare a new variable with the same name as an existing one, and the new variable "shadows" the previous one. This is different from mutation - you're creating an entirely new variable that happens to have the same name.
+        let n = n as usize;
+        let mut memo = vec![0,1];
+        for i in 2..=n {
+            memo.push(memo[i - 1] + memo[i - 2]);
+        }
+        memo[n]
+    }
 }
 
 #[cfg(test)]
