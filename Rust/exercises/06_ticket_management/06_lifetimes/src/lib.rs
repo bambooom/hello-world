@@ -31,7 +31,8 @@ impl TicketStore {
         self.tickets.push(ticket);
     }
 
-    pub fn iter(&self) -> std::slice::Iter<Ticket> {
+    pub fn iter(&self) -> std::slice::Iter<'_, Ticket> {
+        // The '_ means "infer the lifetime here" - it makes it explicit that there's a lifetime without naming it.
         self.tickets.iter()
     }
 }
