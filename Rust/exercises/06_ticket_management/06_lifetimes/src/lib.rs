@@ -36,6 +36,21 @@ impl TicketStore {
     }
 }
 
+// allows borrowing iteration instead of consuming the store
+// <'a>: Declares a lifetime parameter named 'a
+// &'a TicketStore: Implements the trait for a reference to TicketStore that lives for lifetime 'a
+// This means we're implementing IntoIterator for borrowed TicketStore, not owned
+impl<'a> IntoIterator for &'a TicketStore {
+    type Item = &'a Ticket; // Each iteration yields a reference to a Ticket (not an owned Ticket)
+    // The reference lives for lifetime 'a - same as the TicketStore reference
+    type IntoIter = std::slice::Iter<'a, Ticket>; // Returns a slice iterator that borrows the data
+    // The 'a ensures the iterator can't outlive the TicketStore it borrows from
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.tickets.iter() // borrows the Vec
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

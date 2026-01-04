@@ -13,6 +13,16 @@ pub struct TicketStore {
     tickets: Vec<Ticket>,
 }
 
+impl IntoIterator for TicketStore {
+    type Item = Ticket; // associated type
+    type IntoIter = std::vec::IntoIter<Self::Item>; // std::vec::IntoIter<Ticket> is the iterator that Vec<Ticket> produces when consumed
+
+    fn into_iter(self) -> Self::IntoIter {
+        self.tickets.into_iter() // Delegates to Vec's into_iter() method
+        // Returns an iterator that yields owned Ticket values
+    }
+}
+
 #[derive(Clone, Debug, PartialEq)]
 pub struct Ticket {
     pub title: TicketTitle,

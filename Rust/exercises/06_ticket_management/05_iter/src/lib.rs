@@ -34,6 +34,12 @@ impl TicketStore {
     pub fn add_ticket(&mut self, ticket: Ticket) {
         self.tickets.push(ticket);
     }
+
+    /// Returns an iterator over all the tickets in the store.
+    /// The iterator yields immutable references to the tickets.
+    pub fn iter(&self) -> std::slice::Iter<Ticket> {
+        self.tickets.iter() // an iterator over a slice of elements
+    }
 }
 
 #[cfg(test)]
