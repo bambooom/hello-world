@@ -31,6 +31,11 @@ impl TicketStore {
     pub fn add_ticket(&mut self, ticket: Ticket) {
         self.tickets.push(ticket);
     }
+
+    // impl Trait is a feature that allows you to return a type without specifying its name. You just declare what trait(s) the type implements, and Rust figures out the rest.
+    pub fn in_progress(&self) -> impl Iterator<Item = &Ticket> {
+        self.tickets.iter().filter(|t| t.status == Status::InProgress)
+    }
 }
 
 #[cfg(test)]
