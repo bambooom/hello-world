@@ -15,8 +15,46 @@
 use std::thread;
 
 pub fn sum(v: Vec<i32>) -> i32 {
-    todo!()
+    let mid = v.len() / 2;
+    let (left, right) = v.split_at(mid); // find the middle of the vector and split it into two halves
+    let left = left.to_vec(); // to_vec() creates a new vector that owns the data
+    let right = right.to_vec(); // left, right type changed
+
+    // create 2 threads to calculate sum separately
+    let left_sum = thread::spawn(move || left.into_iter().sum::<i32>());
+    // `move` is needed to move the ownership of left into the closure
+    // || is a closure with no arguments
+    // `into_iter()` converts the vector into an iterator that takes ownership of the data
+    // `sum()` takes the iterator and returns the sum
+    let right_sum = thread::spawn(move || right.into_iter().sum::<i32>());
+
+    left_sum.join().unwrap() + right_sum.join().unwrap()
+    // wait for the threads to finish and get the result
 }
+
+// The whole process
+// start：
+// v: Vec<i32> [1, 2, 3, 4, 5, 6]
+//     │
+//     ▼
+// split_at(3)
+//     │
+//     ├─> left: &[i32] [1, 2, 3]  (borrow)
+//     └─> right: &[i32] [4, 5, 6] (borrow)
+//     │
+//     ▼
+// to_vec()
+//     │
+//     ├─> left: Vec<i32> [1, 2, 3]  (new copy with ownership)
+//     └─> right: Vec<i32> [4, 5, 6] (new copy with ownership)
+//     │
+//     ▼
+// move left, right into the closure
+//     │
+//     ├─> left thread owns [1, 2, 3]
+//     └─> right thread owns [4, 5, 6]
+
+
 
 #[cfg(test)]
 mod tests {
