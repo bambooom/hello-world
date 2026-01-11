@@ -26,7 +26,9 @@ fn ready() {
     // since our server doesn't expose any **read** actions.
     // We have no way to know if the inserts are actually happening and if they
     // are happening correctly.
-    let move_forward = false;
+    let move_forward = true;
+    // problem with this exercise, but not updated:
+    // https://github.com/mainmatter/100-exercises-to-learn-rust/issues/53
 
     assert!(move_forward);
 }
