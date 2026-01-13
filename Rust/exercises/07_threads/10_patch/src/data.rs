@@ -15,6 +15,10 @@ pub struct TicketDraft {
     pub description: TicketDescription,
 }
 
+// send a patch to server to update a ticket
+// id field is mandaroty, all other fields are optional
+// if a field is `None`, it means that the field should not be changed
+// if a field is `Some(value)`, it means that the field should be updated to the new `value`
 #[derive(Clone, Debug, PartialEq, Eq)]
 pub struct TicketPatch {
     pub id: TicketId,
