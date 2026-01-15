@@ -7,8 +7,10 @@ use without_channels::store::TicketStore;
 
 #[test]
 fn works() {
-    let store = todo!();
+    // Create a shared store across multiple threads
+    let store = Arc::new(RwLock::new(TicketStore::new()));
 
+    // Create two clients that insert tickets in parallel
     let store1 = store.clone();
     let client1 = spawn(move || {
         let draft = TicketDraft {
