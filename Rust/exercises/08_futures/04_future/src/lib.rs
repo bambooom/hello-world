@@ -10,7 +10,11 @@ fn spawner() {
 }
 
 async fn example() {
-    let non_send = Rc::new(1);
+    {
+        let non_send = Rc::new(1);
+        println!("{}", non_send);
+    } // non_send dropped here
+
+    // non_send is dropped before the yield_now()
     yield_now().await;
-    println!("{}", non_send);
 }
