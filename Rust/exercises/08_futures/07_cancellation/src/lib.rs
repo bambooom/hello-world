@@ -33,19 +33,24 @@ mod tests {
             let mut socket = tokio::net::TcpStream::connect(addr).await.unwrap();
             let (_, mut writer) = socket.split();
 
+            // split the message in two halves, first half will be sent, then sleep for a while, then send the second half
             let (beginning, end) = message.split_at(message.len() / 2);
 
             // Send first half
             writer.write_all(beginning.as_bytes()).await.unwrap();
-            tokio::time::sleep(timeout * 2).await;
+            // sleep for a while, longer than the timeout
+            tokio::time::sleep(timeout * 2).await; // 40ms, twice the server timeout, so `read_to_end` will timeout
+            // send the second half
             writer.write_all(end.as_bytes()).await.unwrap();
 
             // Close the write side of the socket
             let _ = writer.shutdown().await;
         }
 
+        // 在客户端睡眠期间，服务器那一侧的 read_to_end 先超时退出，缓冲里只留下已经读到的前半段内容。下一轮循环虽然继续监听新的连接，但共享的 buffer 已经累积了这些不完整的数据，最终测试得到的就是拼接后的 hefrthta
+
         let buffered = handle.await.unwrap();
         let buffered = std::str::from_utf8(&buffered).unwrap();
-        assert_eq!(buffered, "");
+        assert_eq!(buffered, "hefrthta");
     }
 }
