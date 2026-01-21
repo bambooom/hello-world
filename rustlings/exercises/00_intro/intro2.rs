@@ -1,4 +1,5 @@
 fn main() {
     // TODO: Fix the code to print "Hello world!".
-    printline!("Hello world!");
+    println!("Hello world!"); // println! is a macro that prints to the console
+    // the keyword is `println`, not `printline`
 }

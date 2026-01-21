@@ -1,13 +1,3 @@
-# Intro
-
-Rust uses the `print!` and `println!` macros to print text to the console.
-
-## Further information
-
-- [Hello World](https://doc.rust-lang.org/rust-by-example/hello.html)
-- [Formatted print](https://doc.rust-lang.org/rust-by-example/hello/print.html)
-
-```rust
 fn main() {
     // In general, the `{}` will be automatically replaced with any
     // arguments. These will be stringified.
@@ -55,7 +45,7 @@ fn main() {
 
     // This will not compile because `Structure` does not implement
     // fmt::Display.
-    println!("This struct `{}` won't print...", Structure(3));
+    // println!("This struct `{}` won't print...", Structure(3)); // Structure` cannot be formatted with the default formatter
     // TODO ^ Try uncommenting this line
 
     // For Rust 1.58 and above, you can directly capture the argument from a
@@ -64,5 +54,9 @@ fn main() {
     let number: f64 = 1.0;
     let width: usize = 5;
     println!("{number:>width$}");
+
+
+    // print pi
+    let pi = 3.141592;
+    println!("Pi is roughly {pi:.3}"); // Pi is roughly 3.142
 }
-```
