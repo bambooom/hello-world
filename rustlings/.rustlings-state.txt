@@ -1,6 +1,6 @@
 DON'T EDIT THIS FILE!
 
-options3
+errors6
 
 intro1
 intro2
@@ -51,3 +51,9 @@ hashmaps3
 quiz2
 options1
 options2
+options3
+errors1
+errors2
+errors3
+errors4
+errors5
