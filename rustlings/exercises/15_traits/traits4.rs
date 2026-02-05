@@ -11,7 +11,8 @@ impl Licensed for SomeSoftware {}
 impl Licensed for OtherSoftware {}
 
 // TODO: Fix the compiler error by only changing the signature of this function.
-fn compare_license_types(software1: ???, software2: ???) -> bool {
+fn compare_license_types(software1: impl Licensed, software2: impl Licensed) -> bool {
+    // using Traits as Parameters, any type that implements the Licensed trait can be passed in
     software1.licensing_info() == software2.licensing_info()
 }
 
