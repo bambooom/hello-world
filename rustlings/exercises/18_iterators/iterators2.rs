@@ -4,10 +4,12 @@
 // TODO: Complete the `capitalize_first` function.
 // "hello" -> "Hello"
 fn capitalize_first(input: &str) -> String {
-    let mut chars = input.chars();
-    match chars.next() {
+    let mut chars = input.chars(); // iterator over the characters of the string
+    match chars.next() { // get the first character
         None => String::new(),
-        Some(first) => todo!(),
+        Some(first) => first.to_uppercase().collect::<String>() + chars.as_str(),
+        // to_uppercase() returns an iterator, collect() collects the iterator into a string
+        // as_str() returns the rest of the string as a string slice
     }
 }
 
@@ -15,14 +17,16 @@ fn capitalize_first(input: &str) -> String {
 // Return a vector of strings.
 // ["hello", "world"] -> ["Hello", "World"]
 fn capitalize_words_vector(words: &[&str]) -> Vec<String> {
-    // ???
+    words.iter().map(|word| capitalize_first(word)).collect()
 }
+
+// collect() 是一个“由目标类型决定行为”的泛型函数
 
 // TODO: Apply the `capitalize_first` function again to a slice of string
 // slices. Return a single string.
 // ["hello", " ", "world"] -> "Hello World"
 fn capitalize_words_string(words: &[&str]) -> String {
-    // ???
+    words.iter().map(|word| capitalize_first(word)).collect()
 }
 
 fn main() {
