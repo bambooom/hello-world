@@ -3,13 +3,13 @@
 macro_rules! my_macro {
     () => {
         println!("Check out my macro!");
-    }
+    };
     ($val:expr) => {
         println!("Look at this other macro: {}", $val);
     }
 }
 
 fn main() {
-    my_macro!();
-    my_macro!(7777);
+    my_macro!(); // Check out my macro!
+    my_macro!(7777); // Look at this other macro: 7777
 }
