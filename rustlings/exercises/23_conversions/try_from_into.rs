@@ -28,14 +28,49 @@ enum IntoColorError {
 impl TryFrom<(i16, i16, i16)> for Color {
     type Error = IntoColorError;
 
-    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {}
+    fn try_from(tuple: (i16, i16, i16)) -> Result<Self, Self::Error> {
+        // // Check if all values are in the valid range 0..=255
+        // let (red, green, blue) = tuple;
+
+        // // Check if any value is out of range
+        // if red < 0 || red > 255 || green < 0 || green > 255 || blue < 0 || blue > 255 {
+        //     return Err(IntoColorError::IntConversion);
+        // }
+
+        // // Safe to convert to u8 since we've checked the range
+        // Ok(Color {
+        //     red: red as u8,
+        //     green: green as u8,
+        //     blue: blue as u8,
+        // })
+
+
+        let (Ok(red), Ok(green), Ok(blue)) = (
+            u8::try_from(tuple.0),
+            u8::try_from(tuple.1),
+            u8::try_from(tuple.2),
+        ) else {
+            return Err(IntoColorError::IntConversion);
+        };
+
+        Ok(Self { red, green, blue })
+    }
 }
 
 // TODO: Array implementation.
 impl TryFrom<[i16; 3]> for Color {
     type Error = IntoColorError;
 
-    fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {}
+    // fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+    //     // Convert array to tuple and reuse the tuple implementation
+    //     let (red, green, blue) = (arr[0], arr[1], arr[2]);
+    //     Color::try_from((red, green, blue))
+    // }
+
+    fn try_from(arr: [i16; 3]) -> Result<Self, Self::Error> {
+        // Reuse the implementation for a tuple.
+        Self::try_from((arr[0], arr[1], arr[2]))
+    }
 }
 
 // TODO: Slice implementation.
@@ -43,7 +78,15 @@ impl TryFrom<[i16; 3]> for Color {
 impl TryFrom<&[i16]> for Color {
     type Error = IntoColorError;
 
-    fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {}
+    fn try_from(slice: &[i16]) -> Result<Self, Self::Error> {
+        // Check if the slice has exactly 3 elements
+        if slice.len() != 3 {
+            return Err(IntoColorError::BadLen);
+        }
+
+        // Convert slice to tuple and reuse the tuple implementation
+        Color::try_from((slice[0], slice[1], slice[2]))
+    }
 }
 
 fn main() {

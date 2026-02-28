@@ -41,7 +41,32 @@ enum ParsePersonError {
 impl FromStr for Person {
     type Err = ParsePersonError;
 
-    fn from_str(s: &str) -> Result<Self, Self::Err> {}
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        // Step 1: Split the given string on the commas present in it.
+        let mut split = s.split(',');
+
+        // Step 2: If the split operation returns less or more than 2 elements,
+        // return the error `ParsePersonError::BadLen`.
+        let (Some(name), Some(age_str), None) = (split.next(), split.next(), split.next()) else {
+            //                               ^^^^ there should be no third element
+            return Err(ParsePersonError::BadLen);
+        };
+
+        // Step 3: Use the first element from the split operation as the name.
+        // Step 4: If the name is empty, return the error `ParsePersonError::NoName`.
+        if name.is_empty() {
+            return Err(ParsePersonError::NoName);
+        }
+
+        // Step 5: Parse the second element from the split operation into a `u8` as the age.
+        // Step 6: If parsing the age fails, return the error `ParsePersonError::ParseInt`.
+        let age = age_str.parse::<u8>().map_err(ParsePersonError::ParseInt)?;
+
+        Ok(Person {
+            name: name.to_string(),
+            age,
+        })
+    }
 }
 
 fn main() {
